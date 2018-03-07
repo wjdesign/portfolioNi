@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>林青妮的個人作品集</title>
+<meta name="keywords" content="" />
+<!--<meta name="description" content="jquery.mixitup图片分类插件选项卡形式图片过滤筛选器效果。" />-->
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/layout.css">
+	<link type="text/css" rel="stylesheet" href="css/hover.css">
+<link type="text/css" rel="stylesheet" href="css/jquery.fancybox.css">
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+<script type="text/javascript" src="js/jquery.fancybox.js"></script>
+<!--mixitup	-->
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    
+    $(document).ready(function () {
+        //<![CDATA[
+        $(function () {
+            $(".portfolio-wrapper img").each(function() {
+                var parent = $(this).parent();
+                if (parent[0].tagName == "A") {
+                    parent.attr({
+                        "class": "fancybox",
+                        "rel": "gallery"
+                    });
+                } else {
+                    parent.wrap("<a class='fancybox' rel='gallery' href='" + $(this).attr("src") + "'></a>")
+                }
+            });
+            $(".fancybox").fancybox({
+
+                image : {
+                    protect: true
+                },
+
+                prevEffect : 'none',
+                nextEffect : 'none',
+
+                closeBtn  : true,
+                arrows    : true,
+                nextClick : true,
+
+                helpers : {
+                    thumbs : {
+                        width  : 50,
+                        height : 50
+                    }
+                },
+
+                showNavArrows : true
+
+            });
+        });
+//]]>
+    })
+
+	var filterList = {
+
+		init:function(){
+			// MixItUp plugin
+			$('#portfoliolist').mixitup({
+                navigation: false,
+				targetSelector: '.portfolio',
+				filterSelector: '.filter',
+				effects: ['fade'],
+				easing: 'snap',
+				// call the hover effect
+				onMixEnd: filterList.hoverEffect()
+			});
+
+		},
+		
+		hoverEffect:function(){
+			// Simple parallax effect
+			$('#portfoliolist .portfolio').hover(function(){
+				$(this).find('.label').stop().animate({bottom:0},200,'easeOutQuad');
+				$(this).find('img').stop().animate({top:-30},500,'easeOutQuad');				
+			},function(){
+				$(this).find('.label').stop().animate({bottom:-40},200,'easeInQuad');
+				$(this).find('img').stop().animate({top:0},300,'easeOutQuad');								
+			});				
+		}
+
+	};
+
+	// Run the show!
+	filterList.init();
+	
+});	
+</script>
+</head>
+<body>
+<div id="intro-bar" class="intro-bar">
+	<div class="container">
+		<div class="row">
+			<div class="intro-button"><i class="fa fa-user-circle"></i>基本資料</div>
+			<div class="intro-main">
+				<div class="intro-photo">
+					<img class="img-responsive img-circle hvr-float-shadow" width="150px" height="150px" src="img/info-photo.png" alt="">
+				</div>
+				<h3>林青妮 / Yvonne</h3>
+				<p><a href="https://www.shoppingdesign.com.tw/post/view/2108" target="_blank">2017年 紅點Best Of Best<span></span></a></p>
+				<p><a href="img/fun_4.jpg" target="_blank">2017年 Adobe 卓越設計獎</a></p>
+				<p><a href="img/fun_4.jpg" target="_blank">2017年 青春設計展 <span>優選</span></a></p>
+				<p><a href="http://www.ydf.org.tw/winners/8" target="_blank">2017年 放視大賞 <span>銅獎</span></a></p>
+				<p class="info-text">從高中開始就決定走<span>服裝設計科</span>到大學的<span>流行設計系</span>，從一開始的服裝到最後的整體造型，都學會獨立完成，也讓我在畢展中得到許多的經驗以及評審的肯定。在大學4年中，不止學習學校給的，也利用課餘時間<span>去打工賺取經驗</span>，讓我體驗也學到了許多學校學不到的，也接觸到更多的人事物，讓我在大學的4年裡過的非常充實。
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+	//基本資料伸縮
+	if(screen.width > 767) {
+        $("#intro-bar").hover(function () {
+            $(this).stop().animate({right: '0px'}, 500);
+        }, function () {
+            $(this).stop().animate({right: '-314px'}, 500);
+        });
+    } else {
+	    var count = 0;
+        $("#intro-bar").click(function () {
+            count++;
+            //even odd click detect
+            var isEven = function (someNumber) {
+                return (someNumber % 2 === 0) ? true : false;
+            };
+            // on odd clicks do this
+            if (isEven(count) === false) {
+                $(this).stop().animate({right: '-74px'}, 500);
+            } else if (isEven(count) === true) {
+                $(this).stop().animate({right: '-314px'}, 500);
+            };
+        });
+    }
+
+</script>
+<div id="header">
+	<a href="#filters-s" class="btn btn-info" data-toggle="collapse"><i class="fa fa-bars"></i></a>
+
+	<!--Mobile Navi-->
+	<ul id="filters-s" class="clearfix collapse">
+		<li><span class="filter active">所有作品</span></li>
+		<li><span class="filter" data-filter="3d">立體裁剪</span></li>
+		<li><span class="filter" data-filter="dress">服裝製作</span></li>
+		<li><span class="filter" data-filter="makeup">彩妝與美髮</span></li>
+		<li><span class="filter" data-filter="design">設計與繪畫</span></li>
+	</ul>
+
+	<div class="container">
+
+		<ul id="filters" class="clearfix">
+			<li><span class="filter hvr-underline-from-left active" data-filter="3d dress makeup design">所有作品</span></li>
+			<li><span class="filter hvr-underline-from-left" data-filter="3d">立體裁剪</span></li>
+			<li><span class="filter hvr-underline-from-left" data-filter="dress">服裝製作</span></li>
+			<li><span class="filter hvr-underline-from-left" data-filter="makeup">彩妝與美髮</span></li>
+			<li><span class="filter hvr-underline-from-left" data-filter="design">設計與繪畫</span></li>
+		</ul>
+
+	</div>
+</div>
+<div id="main">
+	<div class="container portfolio-container">
+		<div class="row">
+			<div id="portfoliolist">
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/1.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/3.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/4.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/5.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/6.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/7.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪7</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/8.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪8</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/9.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪9</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio 3d" data-cat="3d">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/3d/10.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">立體裁剪10</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/1-01.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">婚紗1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/1-02.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">婚紗2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/1-03.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">婚紗3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/1-04.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">婚紗4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/1-05.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">婚紗5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/2-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/2-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/3-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/3-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/4-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/4-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/5-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/5-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/6-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/6-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/7-01.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/7-02.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/7-03.jpeg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/8.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">專題作品合影</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio dress" data-cat="dress">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/dress/9.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">黑社會</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/1.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/3.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/4.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/5.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/6.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/7.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝7</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/8.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝8</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/9.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">美髮1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/10.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">美髮2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/11.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝封面練習</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio makeup" data-cat="makeup">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/makeup/12.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">彩妝練習1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/1.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-1.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-3.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-4.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-5.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/2-6.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫2-6</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/3.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫3</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/4.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫4</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/5.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫5</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/5-2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫5-2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/6-1.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫6-1</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/6-2.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫6-2</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/7.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">設計與繪畫7</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 portfolio design" data-cat="design">
+					<div class="portfolio-wrapper">
+						<img src="img/portfolios/design/8.jpg" alt=""/>
+						<div class="label">
+							<div class="label-text"><a class="text-title">shirt</a><span
+									class="text-category">Portrait</span></div>
+							<div class="label-bg"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/lightbox.js"></script>
+<!--Overlay.js-->
+<script>
+    $(".overlay").hide();
+
+    $(".gallery-item").hover(function () {
+        $(this).find('.overlay').addClass('animated fadeIn').show();
+    },function () {
+        $(this).find('.overlay').removeClass('animated fadeIn').hide();
+    });
+
+    <!--Lightbox-->
+    $(function(){
+        $('[data-rel="lightbox"]').lightbox({
+			arrow:true
+		});
+    });
+</script>
+</body>
+</html>
+<!-- 本代码由科蚁网（http://www.ke01.com）收集并编辑整理 -->
